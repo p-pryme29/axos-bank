@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Axos Bank</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-page">
+
+    <div class="login-container">
+
+        <div class="login-brand">
+            <h1>Axos Bank<span>.</span></h1>
+            <p>Take control of your finances.</p>
+        </div>
+
+        <div class="login-card">
+
+            <div class="login-heading">
+                <h2>Welcome back</h2>
+                <p>Enter your details to access your account.</p>
+            </div>
+
+            <form id="login-form">
+
+                <div class="login-field">
+                    <label for="login-email">Email Address</label>
+                    <input
+                        type="email"
+                        id="login-email"
+                        placeholder="Enter your email"
+                        required
+                    >
+                </div>
+
+                <div class="login-field">
+                    <label for="login-password">Password</label>
+                    <input
+                        type="password"
+                        id="login-password"
+                        placeholder="Enter your password"
+                        required
+                    >
+                </div>
+
+                <div class="login-options">
+                    <label>
+                        <input type="checkbox" id="remember-me">
+                        Remember me
+                    </label>
+
+                    <a href="#" id="forgot-password">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="login-submit">
+                    Log In
+                </button>
+
+            </form>
+
+            <div class="login-footer">
+    <p>Private access to Axos Bank.</p>
+</div>
+        </div>
+
+        <p class="login-copyright">
+            © 2026 Axos Bank. All rights reserved.
+        </p>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script src="login.js"></script>
+
+</body>
+</html>

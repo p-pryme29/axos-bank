@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Axos Bank - Personal Finance</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <h2 class="logo">Axos Bank.</h2>
+
+        <nav class="navigation">
+
+            <a href="#" class="nav-link active" data-page="dashboard">Dashboard</a>
+
+            <a href="#" class="nav-link" data-page="transactions">Transactions</a>
+
+            <a href="#" class="nav-link" data-page="cards">My Cards</a>
+
+            <a href="#" class="nav-link" data-page="analytics">Analytics</a>
+
+            <a href="#" class="nav-link" data-page="savings">Savings</a>
+
+            <a href="#" class="nav-link" data-page="settings">Settings</a>
+
+        </nav>
+
+    </aside>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    <button
+    type="button"
+    class="mobile-menu-button"
+    id="mobile-menu-button"
+    aria-label="Open navigation"
+>
+    ☰
+</button>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+
+        <!-- DASHBOARD PAGE -->
+
+        <div class="page-section" id="dashboard">
+
+           <header class="header">
+            
+
+    <div>
+        <h1>Dashboard</h1>
+        <p>Welcome back! Here's your financial overview.</p>
+    </div>
+
+    <div class="header-actions">
+
+        <div class="notification-wrapper">
+
+    <button class="notification-button" id="notification-button" type="button">
+        <span>🔔</span>
+        <span class="notification-badge" id="notification-count">0</span>
+    </button>
+
+    <div class="notification-panel" id="notification-panel">
+
+        <div class="notification-header">
+            <h3>Notifications</h3>
+           <button type="button" id="clear-notifications" data-admin-only>Clear all</button>
+        </div>
+
+        <div class="notification-list" id="notification-list">
+            <p class="empty-notifications">You're all caught up!</p>
+        </div>
+
+    </div>
+
+</div>
+
+        <div class="profile">
+    <span id="profile-initials">NL</span>
+    <p id="dashboard-profile-name">Nora Latham</p>
+</div>
+        <button type="button" id="logout-button" class="logout-button">
+    Log Out
+</button>
+
+    </div>
+
+</header>
+
+
+            <!-- BALANCE -->
+
+            <section class="balance-section">
+
+                <div class="balance-card">
+
+                    <p>Total Balance</p>
+
+                    <h2 id="total-balance">
+    <span class="loading-spinner"></span>
+</h2>
+
+                    <span>+12.5% this month</span>
+
+                </div>
+
+            </section>
+
+
+            <!-- INCOME AND EXPENSES -->
+
+            <section class="overview">
+
+                <div class="overview-card">
+                    <p>Total Income</p>
+                    <h2 id="total-income">
+    <span class="loading-spinner"></span>
+</h2>
+                </div>
+
+                <div class="overview-card">
+                    <p>Total Expenses</p>
+                   <h2 id="total-expenses">
+    <span class="loading-spinner"></span>
+</h2>
+                </div>
+
+                <div class="overview-card">
+                    <p>Total Savings</p>
+                    <h2 id="dashboard-total-savings">$0.00</h2>
+                </div>
+
+            </section>
+
+
+            <!-- ADD TRANSACTION FORM -->
+
+            <section class="transactions">
+
+                <form id="transaction-form" class="transaction-form" data-admin-only>
+
+                    <h3>Add New Transaction</h3>
+
+                    <input
+                        type="text"
+                        id="description"
+                        placeholder="Transaction description"
+                        required
+                    >
+
+                    <input
+                        type="number"
+                        id="amount"
+                        placeholder="Amount"
+                        min="0.01"
+                        step="0.01"
+                        required
+                    >
+
+                    <select id="transaction-type">
+
+                        <option value="income">Income</option>
+
+                        <option value="expense">Expense</option>
+
+                    </select>
+
+                    <button type="submit">Add Transaction</button>
+                    
+                    <select id="transaction-status">
+    <option value="pending">Pending</option>
+    <option value="completed">Completed</option>
+</select>
+
+                </form>
+
+            </section>
+
+
+            <!-- ANALYTICS AND SAVINGS -->
+
+            <section class="insights-grid">
+
+                <div class="analytics-card">
+
+                    <h2>Spending Analytics</h2>
+
+                    <p class="section-description">Your monthly expenses</p>
+
+                    <div class="expense-item">
+                        <div class="expense-info">
+                            <span>Food & Dining</span>
+                            <strong>$850</strong>
+                        </div>
+
+                        <div class="progress-bar">
+                            <div class="progress food"></div>
+                        </div>
+                    </div>
+
+                    <div class="expense-item">
+                        <div class="expense-info">
+                            <span>Shopping</span>
+                            <strong>$620</strong>
+                        </div>
+
+                        <div class="progress-bar">
+                            <div class="progress shopping"></div>
+                        </div>
+                    </div>
+
+                    <div class="expense-item">
+                        <div class="expense-info">
+                            <span>Transportation</span>
+                            <strong>$420</strong>
+                        </div>
+
+                        <div class="progress-bar">
+                            <div class="progress transport"></div>
+                        </div>
+                    </div>
+
+                    <div class="expense-item">
+                        <div class="expense-info">
+                            <span>Entertainment</span>
+                            <strong>$250</strong>
+                        </div>
+
+                        <div class="progress-bar">
+                            <div class="progress entertainment"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- SAVINGS GOALS -->
+
+                <div class="savings-card">
+    <h2>Savings Goals</h2>
+
+    <p class="section-description">
+        Track your financial goals
+    </p>
+
+    <div id="dashboard-savings-goals"></div>
+</div>
+
+            </section>
+
+
+            <!-- RECENT TRANSACTIONS -->
+
+            <section class="transactions">
+
+                <h2>Recent Transactions</h2>
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="transaction-list"></tbody>
+
+
+                </table>
+
+            </section>
+
+        </div>
+
+
+        <!-- TRANSACTIONS PAGE -->
+
+        <div class="page-section" id="transactions" hidden>
+
+    <h1>Transactions</h1>
+
+    <p>Manage and review your financial activity.</p>
+
+    <div class="page-card">
+
+        <h2>All Transactions</h2>
+
+        <div class="transaction-controls">
+
+            <input
+                type="text"
+                id="search-transaction"
+                placeholder="Search transactions..."
+            >
+
+            <select id="filter-transaction">
+
+               <option value="all">All Transactions</option>
+    <option value="income">Income</option>
+    <option value="expense">Expenses</option>
+</select>
+
+<select id="filter-status">
+    <option value="all">All Statuses</option>
+    <option value="pending">Pending</option>
+    <option value="completed">Completed</option>
+
+            </select>
+
+        </div>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="all-transactions-list">
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+        <!-- MY CARDS PAGE -->
+
+        <div class="page-section" id="cards" hidden>
+
+    <h1>My Cards</h1>
+    <p>Manage your virtual and physical cards.</p>
+
+    <div class="cards-layout">
+
+        <div class="card-preview">
+
+            <div class="card-top">
+                <h2>Axos Bank.</h2>
+                <span>VISA</span>
+            </div>
+
+            <p class="card-label">CARD NUMBER</p>
+
+            <h2 class="card-number">
+                **** **** **** 4829
+            </h2>
+
+            <div class="card-bottom">
+
+                <div>
+                    <small>CARD HOLDER</small>
+                    <p>NORA LATHAM</p>
+                </div>
+
+                <div>
+                    <small>EXPIRES</small>
+                    <p>12/29</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-management">
+
+            <h2>Card Management</h2>
+
+            <p>Manage your card security.</p>
+
+            <div class="card-status">
+                <span>Card Status</span>
+                <strong id="card-status">Active</strong>
+            </div>
+
+            <button
+                type="button"
+                id="freeze-card"
+                class="freeze-button">
+                Freeze Card
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="page-card card-spending">
+
+        <h2>Card Spending</h2>
+
+        <p>Your card spending overview.</p>
+
+        <h1>$2,450.00</h1>
+
+        <span>This month's spending</span>
+
+    </div>
+
+</div>
+
+
+        <!-- ANALYTICS PAGE -->
+
+        <div class="page-section" id="analytics" hidden>
+
+    <h1>Analytics</h1>
+    <p>Understand your spending habits.</p>
+
+    <div class="overview analytics-overview">
+
+        <div class="overview-card">
+            <p>Total Income</p>
+            <h2 id="analytics-income">$0.00</h2>
+        </div>
+
+        <div class="overview-card">
+            <p>Total Expenses</p>
+            <h2 id="analytics-expenses">$0.00</h2>
+        </div>
+
+        <div class="overview-card">
+            <p>Pending Transactions</p>
+            <h2 id="analytics-pending">0</h2>
+        </div>
+
+    </div>
+
+    <!-- Income and Expense Chart -->
+
+<div class="analytics-chart-grid">
+
+    <div class="page-card chart-card">
+
+        <h2>Income vs Expenses</h2>
+
+        <p>Compare your income and spending</p>
+
+        <div class="chart-container">
+            <canvas id="incomeExpenseChart"></canvas>
+        </div>
+
+    </div>
+
+    <!-- Spending Breakdown Chart -->
+
+    <div class="page-card chart-card">
+
+        <h2>Spending Breakdown</h2>
+
+        <p>See where your money goes</p>
+
+        <div class="chart-container">
+            <canvas id="spendingBreakdownChart"></canvas>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Monthly Financial Trends -->
+
+<div class="page-card chart-card trend-card">
+
+    <h2>Monthly Financial Trends</h2>
+
+    <p>Track your income and expenses over time</p>
+
+    <div class="chart-container trend-container">
+        <canvas id="monthlyTrendChart"></canvas>
+    </div>
+    <!-- Financial Insights -->
+
+<div class="analytics-insights">
+
+    <div class="page-card insight-card">
+        <p>Savings Rate</p>
+        <h2 id="insight-savings-rate">0%</h2>
+        <span>Your income retained after expenses</span>
+    </div>
+
+    <div class="page-card insight-card">
+        <p>Top Spending Category</p>
+        <h2 id="insight-top-category">N/A</h2>
+        <span>Your highest spending category</span>
+    </div>
+
+    <div class="page-card insight-card">
+        <p>Net Cash Flow</p>
+        <h2 id="insight-cash-flow">$0.00</h2>
+        <span>Income minus expenses</span>
+    </div>
+
+    <div class="page-card insight-card">
+        <p>Completed Transactions</p>
+        <h2 id="insight-completed-count">0</h2>
+        <span>Successfully completed transactions</span>
+    </div>
+
+</div>
+
+</div>
+
+<!-- Spending by Category -->
+
+<div class="page-card analytics-breakdown">
+
+    <h2>Spending by Category</h2>
+
+    <p>Your expense breakdown</p>
+
+    <div id="category-breakdown"></div>
+
+</div>
+</div>
+
+        <!-- SAVINGS PAGE -->
+
+        <div class="page-section" id="savings" hidden>
+    <h1>Savings Goals</h1>
+    <p>Set goals and track your savings progress.</p>
+
+    <div class="savings-summary">
+        <div class="overview-card">
+            <p>Total Saved</p>
+            <h2 id="total-saved">$0.00</h2>
+        </div>
+
+        <div class="overview-card">
+            <p>Active Goals</p>
+            <h2 id="active-goals">0</h2>
+        </div>
+    </div>
+
+    <div class="page-card savings-form-card">
+        <h2>Create a Savings Goal</h2>
+
+        <form id="savings-form" data-admin-only>
+            <label for="goal-name">Goal Name</label>
+            <input
+                type="text"
+                id="goal-name"
+                placeholder="e.g. New Laptop"
+                required
+            >
+
+            <label for="goal-target">Target Amount ($)</label>
+            <input
+                type="number"
+                id="goal-target"
+                placeholder="Enter target amount"
+                min="1"
+                step="0.01"
+                required
+            >
+
+            <button type="submit">Create Goal</button>
+        </form>
+    </div>
+
+    <div class="savings-goals-container">
+        <h2>Your Savings Goals</h2>
+        <div id="savings-goals-list"></div>
+    </div>
+</div>
+
+
+        <!-- SETTINGS PAGE -->
+
+        <div class="page-section" id="settings" hidden>
+    <h1>Settings</h1>
+    <p>Manage your account preferences and settings.</p>
+
+    <div class="settings-container">
+
+        <div class="page-card profile-settings">
+            <h2>Profile Information</h2>
+            <p>Update your personal information.</p>
+
+            <form id="profile-form" data-admin-only>
+
+                <label for="profile-name">Full Name</label>
+                <input
+                    type="text"
+                    id="profile-name"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+                <label for="profile-email">Email Address</label>
+                <input
+                    type="email"
+                    id="profile-email"
+                    placeholder="Enter your email address"
+                    required
+                >
+
+                <label for="profile-phone">Phone Number</label>
+                <input
+                    type="tel"
+                    id="profile-phone"
+                    placeholder="Enter your phone number"
+                >
+
+                <button type="submit">Save Profile</button>
+
+            </form>
+        </div>
+
+        <div class="page-card account-information">
+            <h2>Account Information</h2>
+
+            <div class="settings-info">
+                <span>Account Type</span>
+                <strong>Personal</strong>
+            </div>
+
+            <div class="settings-info">
+                <span>Account Status</span>
+                <strong class="account-active">Active</strong>
+            </div>
+
+            <div class="settings-info">
+                <span>Platform</span>
+                <strong>Axos Bank</strong>
+            </div>
+        </div>
+<div class="page-card theme-settings">
+    <h2>Appearance</h2>
+    <p>Choose how Axos Bank looks.</p>
+
+    <div class="theme-option">
+        <span>Dark Mode</span>
+        <label class="theme-switch">
+            <input type="checkbox" id="dark-mode-toggle">
+            <span class="theme-slider"></span>
+        </label>
+    </div>
+</div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script>
+    (async function() {
+
+        const hasAccess = await checkUserAccess();
+
+        if (hasAccess) {
+            const dashboardScript = document.createElement("script");
+            dashboardScript.src = "script.js";
+            document.body.appendChild(dashboardScript);
+        }
+
+    })();
+</script>
+
+
+</body>
+
+</html>
