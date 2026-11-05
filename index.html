@@ -296,7 +296,7 @@
 
                 <h2>Recent Transactions</h2>
 
-                <table>
+                <table class="dashboard-transactions-table">
 
                     <thead>
                         <tr>
@@ -854,6 +854,39 @@
     </div>
 </div>
 
+</main>
+
+<!-- MOBILE BOTTOM NAVIGATION -->
+
+<nav class="mobile-bottom-nav">
+
+    <a href="#" class="nav-link active" data-page="dashboard">
+        <span class="mobile-nav-icon">⌂</span>
+        <span>Home</span>
+    </a>
+
+    <a href="#" class="nav-link" data-page="transactions">
+        <span class="mobile-nav-icon">⇄</span>
+        <span>Activity</span>
+    </a>
+
+    <a href="#" class="nav-link" data-page="cards">
+        <span class="mobile-nav-icon">▣</span>
+        <span>Cards</span>
+    </a>
+
+    <a href="#" class="nav-link" data-page="analytics">
+        <span class="mobile-nav-icon">▥</span>
+        <span>Analytics</span>
+    </a>
+
+    <button type="button" id="mobile-more-button">
+        <span class="mobile-nav-icon">☰</span>
+        <span>More</span>
+    </button>
+
+</nav>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -916,6 +949,24 @@
 
 </div>
 
+<!-- TRANSACTION DETAILS MODAL -->
+
+<div id="transaction-details-modal" class="transaction-details-modal" hidden>
+
+    <div class="transaction-details-content">
+
+        <button type="button" id="close-transaction-details">
+            &times;
+        </button>
+
+        <h2>Transaction Details</h2>
+
+        <div id="transaction-details-content"></div>
+
+    </div>
+
+</div>
+
 </body>
 
-</html>
+</html>`

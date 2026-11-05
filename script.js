@@ -336,6 +336,7 @@ return matchesSearch && matchesFilter && matchesStatus;
     filteredTransactions.forEach(function(transaction) {
 
         const row = document.createElement("tr");
+        row.dataset.transactionId = transaction.id;
 
         const descriptionCell = document.createElement("td");
         descriptionCell.textContent = transaction.description;
@@ -881,6 +882,7 @@ function displayDashboardTransactions() {
     transactions.slice(0, 5).forEach(function(transaction) {
 
         const row = document.createElement("tr");
+        row.dataset.transactionId = transaction.id;
 
         // Description and category icon
         const descriptionCell = document.createElement("td");
@@ -1347,33 +1349,66 @@ const navigationLinks = document.querySelectorAll(".nav-link");
 
 const pageSections = document.querySelectorAll(".page-section");
 
+function showPage(selectedPage) {
+
+    const targetPage = document.getElementById(selectedPage);
+
+    if (!targetPage) return;
+
+    // Hide all pages
+
+    pageSections.forEach(function(section) {
+        section.hidden = true;
+    });
+
+    // Show selected page
+
+    targetPage.hidden = false;
+
+    // Synchronize all navigation links
+
+    navigationLinks.forEach(function(navLink) {
+
+        navLink.classList.toggle(
+            "active",
+            navLink.dataset.page === selectedPage
+        );
+
+    });
+
+}
+
+// Handle sidebar and bottom navigation
+
 navigationLinks.forEach(function(link) {
 
     link.addEventListener("click", function(event) {
 
         event.preventDefault();
 
-        const selectedPage = link.dataset.page;
-
-        pageSections.forEach(function(section) {
-
-            section.hidden = true;
-
-        });
-
-        document.getElementById(selectedPage).hidden = false;
-
-        navigationLinks.forEach(function(navLink) {
-
-            navLink.classList.remove("active");
-
-        });
-
-        link.classList.add("active");
+        showPage(link.dataset.page);
 
     });
 
 });
+
+// Mobile More button
+
+const mobileMoreButton = document.getElementById("mobile-more-button");
+
+if (mobileMoreButton) {
+
+    mobileMoreButton.addEventListener("click", function() {
+
+        const menuButton = document.getElementById("mobile-menu-button");
+
+        if (menuButton) {
+            menuButton.click();
+        }
+
+    });
+
+}
 
 // Card management
 
@@ -2503,4 +2538,96 @@ document.getElementById("close-notifications").addEventListener("click", functio
     document.getElementById("notification-panel").classList.remove("show");
 
 });
+// AXOS BANK - TRANSACTION DETAILS
+
+function openTransactionDetails(transaction) {
+
+    const modal = document.getElementById("transaction-details-modal");
+    const detailsContainer = document.getElementById("transaction-details-content");
+
+    detailsContainer.innerHTML = "";
+
+    const details = [
+        ["Transaction ID", "AXS-" +
+    new Date().toISOString().slice(0, 10).replace(/-/g, "") +
+    "-" +
+    String(transaction.id).padStart(6, "0")
+],
+        ["Description", transaction.description],
+        ["Amount", formatMoney(transaction.amount)],
+        ["Type", transaction.type === "income" ? "Credit" : "Debit"],
+        ["Category", transaction.category || "Other"],
+        ["Date", transaction.date],
+        ["Status", transaction.status || "completed"]
+    ];
+
+    details.forEach(function(item) {
+
+        const detailRow = document.createElement("div");
+        detailRow.className = "transaction-detail-row";
+
+        const label = document.createElement("span");
+        label.textContent = item[0];
+
+        const value = document.createElement("strong");
+        value.textContent = item[1];
+
+        detailRow.appendChild(label);
+        detailRow.appendChild(value);
+
+        detailsContainer.appendChild(detailRow);
+
+    });
+
+    modal.hidden = false;
+}
+
+
+// Open details when a transaction row is clicked
+
+["transaction-list", "all-transactions-list"].forEach(function(listId) {
+
+    const list = document.getElementById(listId);
+
+    if (!list) return;
+
+    list.addEventListener("click", function(event) {
+
+        if (event.target.closest("button")) return;
+
+        const row = event.target.closest("tr");
+
+        if (!row) return;
+
+        const transactionId = row.dataset.transactionId;
+
+        const transaction = transactions.find(function(item) {
+            return String(item.id) === String(transactionId);
+        });
+
+        if (transaction) {
+            openTransactionDetails(transaction);
+        }
+
+    });
+
+});
+
+
+// Close transaction details
+
+// Close transaction details
+
+const closeTransactionDetailsButton =
+    document.getElementById("close-transaction-details");
+
+if (closeTransactionDetailsButton) {
+
+    closeTransactionDetailsButton.addEventListener("click", function() {
+
+        document.getElementById("transaction-details-modal").hidden = true;
+
+    });
+
+}
 initializeWebsite();

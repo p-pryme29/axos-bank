@@ -4357,3 +4357,413 @@ body.dark-mode .notification-item strong {
 body.dark-mode .notification-item p {
     color: #cbd5e1;
 }
+/* AXOS BANK - MOBILE OVERVIEW CARDS */
+
+@media screen and (max-width: 600px) {
+
+    .overview {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .overview-card {
+        min-width: 0;
+        padding: 12px;
+        overflow: hidden;
+    }
+
+    /* Keep income and expenses amounts on one line */
+
+    #total-income,
+    #total-expenses {
+        white-space: nowrap;
+        font-size: clamp(11px, 3.5vw, 16px);
+    }
+
+    /* Savings occupies the full row */
+
+    .overview-card:nth-child(3) {
+        grid-column: 1 / -1;
+    }
+
+    #dashboard-total-savings {
+        white-space: nowrap;
+    }
+
+}
+/* AXOS BANK - MOBILE BALANCE CARD */
+
+@media screen and (max-width: 600px) {
+
+    .balance-section {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .balance-card {
+        width: 100%;
+        min-height: 145px;
+        padding: 20px;
+        border-radius: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .balance-card p {
+        font-size: 13px;
+    }
+
+    #total-balance {
+        font-size: clamp(25px, 7vw, 32px);
+        white-space: nowrap;
+    }
+
+    .balance-card span {
+        font-size: 12px;
+    }
+
+}
+/* AXOS BANK - MOBILE BOTTOM NAVIGATION */
+
+/* Hide mobile navigation on desktop */
+
+.mobile-bottom-nav {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+
+    .mobile-bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 68px;
+        background: #ffffff;
+        border-top: 1px solid #e5e7eb;
+        justify-content: space-around;
+        align-items: center;
+        padding: 5px 8px;
+        z-index: 9999;
+        box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.06);
+    }
+
+    .mobile-bottom-nav a,
+    .mobile-bottom-nav button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        flex: 1;
+        height: 100%;
+        border: none;
+        background: transparent;
+        color: #8491a5;
+        text-decoration: none;
+        font-family: Arial, sans-serif;
+        font-size: 10px;
+        cursor: pointer;
+    }
+
+    .mobile-bottom-nav .mobile-nav-icon {
+        font-size: 21px;
+        line-height: 1;
+    }
+
+    .mobile-bottom-nav .active {
+        color: #15365b;
+        font-weight: bold;
+    }
+
+    /* Prevent content from hiding behind navigation */
+
+    body {
+        padding-bottom: 75px;
+    }
+/* Hide old hamburger button on mobile */
+
+.mobile-menu-button {
+    display: none !important;
+}
+
+}
+/* AXOS BANK - MOBILE TRANSACTION FORM */
+
+@media screen and (max-width: 600px) {
+
+    .transaction-form {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        width: 100%;
+        gap: 14px;
+        padding: 18px;
+        margin: 18px 0;
+        border-radius: 16px;
+    }
+
+    .transaction-form h3 {
+        font-size: 18px;
+        margin-bottom: 4px;
+    }
+
+    .transaction-form input,
+    .transaction-form select {
+        width: 100%;
+        min-width: 0;
+        height: 48px;
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .transaction-form button {
+        width: 100%;
+        min-height: 48px;
+        font-size: 15px;
+        grid-column: 1;
+    }
+
+}
+/* AXOS BANK - MOBILE TRANSACTION SUMMARY */
+
+@media screen and (max-width: 600px) {
+
+    .transaction-summary-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        width: 100%;
+    }
+
+    .transaction-summary-card {
+        min-width: 0;
+        padding: 14px;
+        border-radius: 14px;
+        overflow: hidden;
+    }
+
+    .transaction-summary-card p {
+        font-size: 12px;
+    }
+
+    .transaction-summary-card h2 {
+        font-size: clamp(16px, 4.5vw, 21px);
+        overflow-wrap: anywhere;
+    }
+
+    .transaction-summary-card span {
+        font-size: 10px;
+    }
+
+    .summary-card-icon {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+}
+/* AXOS BANK - MOBILE TRANSACTION FILTERS */
+
+@media screen and (max-width: 600px) {
+
+    .transactions-card {
+        width: 100%;
+        padding: 16px;
+        overflow: hidden;
+    }
+
+    .transactions-card-header {
+        margin-bottom: 16px;
+    }
+
+    .transactions-card-header h2 {
+        font-size: 18px;
+    }
+
+    .transactions-card-header p {
+        font-size: 12px;
+    }
+
+    .transaction-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .transaction-controls input,
+    .transaction-controls select {
+        width: 100%;
+        min-width: 0;
+        height: 46px;
+        padding: 12px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        font-size: 14px;
+    }
+
+}
+/* AXOS BANK - MOBILE TRANSACTION TABLE */
+
+@media screen and (max-width: 600px) {
+
+    .transactions-table {
+        min-width: 650px;
+    }
+
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .transactions-table th,
+    .transactions-table td {
+        padding: 12px 10px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    .transactions-table button {
+        padding: 7px 10px;
+        font-size: 11px;
+        margin: 2px;
+    }
+
+}
+/* AXOS BANK - MOBILE DASHBOARD TRANSACTIONS */
+
+@media screen and (max-width: 600px) {
+
+    .dashboard-transactions-table {
+        min-width: 550px;
+        width: 100%;
+    }
+
+    .dashboard-transactions-table th,
+    .dashboard-transactions-table td {
+        padding: 12px 10px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    .transactions:has(.dashboard-transactions-table) {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+}
+/* DASHBOARD TRANSACTION AMOUNT COLORS */
+
+.dashboard-transactions-table td.expense {
+    color: #dc2626 !important;
+}
+
+.dashboard-transactions-table td.income {
+    color: #16a34a !important;
+}
+/* AXOS BANK - TRANSACTION DETAILS MODAL */
+
+.transaction-details-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 25, 45, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 10000;
+}
+
+.transaction-details-modal[hidden] {
+    display: none;
+}
+
+.transaction-details-content {
+    position: relative;
+    background: #ffffff;
+    width: 100%;
+    max-width: 480px;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
+}
+
+.transaction-details-content h2 {
+    color: #102B4E;
+    font-size: 22px;
+    margin-bottom: 25px;
+}
+
+#close-transaction-details {
+    position: absolute;
+    top: 15px;
+    right: 18px;
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    color: #64748b;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+    .transaction-details-content {
+        padding: 24px 18px;
+        border-radius: 16px;
+    }
+}
+/* TRANSACTION DETAILS ROWS */
+
+.transaction-detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #E8EDF3;
+}
+
+.transaction-detail-row:last-child {
+    border-bottom: none;
+}
+
+.transaction-detail-row span {
+    color: #8491A5;
+    font-size: 13px;
+}
+
+.transaction-detail-row strong {
+    color: #102B4E;
+    font-size: 13px;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+@media screen and (max-width: 600px) {
+    .transaction-detail-row {
+        padding: 13px 0;
+    }
+
+    .transaction-detail-row span,
+    .transaction-detail-row strong {
+        font-size: 12px;
+    }
+}
+/* DASHBOARD TRANSACTION AMOUNT COLORS */
+
+.dashboard-transactions-table td.expense {
+    color: #dc2626 !important;
+}
+
+.dashboard-transactions-table td.income {
+    color: #16a34a !important;
+}
+/* Keep admin-only elements hidden when required */
+
+[data-admin-only][hidden] {
+    display: none !important;
+}
