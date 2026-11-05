@@ -242,6 +242,70 @@ function updateBalance() {
 
 
 // 6. Display transactions
+// UPDATE TRANSACTION SUMMARY CARDS
+
+function updateTransactionSummary() {
+
+    const totalCount = transactions.length;
+
+    const totalIncome = transactions
+        .filter(function(transaction) {
+            return transaction.type === "income";
+        })
+        .reduce(function(total, transaction) {
+            return total + Number(transaction.amount);
+        }, 0);
+
+    const totalExpenses = transactions
+        .filter(function(transaction) {
+            return transaction.type === "expense";
+        })
+        .reduce(function(total, transaction) {
+            return total + Number(transaction.amount);
+        }, 0);
+
+    const pendingCount = transactions
+        .filter(function(transaction) {
+            return transaction.status === "pending";
+        }).length;
+
+    document.getElementById("total-transactions-count").textContent =
+        totalCount;
+
+    document.getElementById("transaction-income-total").textContent =
+        formatMoney(totalIncome);
+
+    document.getElementById("transaction-expenses-total").textContent =
+        formatMoney(totalExpenses);
+
+    document.getElementById("pending-transactions-count").textContent =
+        pendingCount;
+}
+function updateCardSpending() {
+
+    const currentMonth = new Date().getMonth();
+    const currentYear = new Date().getFullYear();
+
+    const monthlySpending = transactions
+        .filter(function(transaction) {
+
+            const transactionDate = new Date(transaction.date);
+
+            return (
+                transaction.type === "expense" &&
+                transaction.status === "completed" &&
+                transactionDate.getMonth() === currentMonth &&
+                transactionDate.getFullYear() === currentYear
+            );
+
+        })
+        .reduce(function(total, transaction) {
+            return total + Number(transaction.amount);
+        }, 0);
+
+    document.getElementById("card-monthly-spending").textContent =
+        formatMoney(monthlySpending);
+}
 
 function displayTransactions() {
 
@@ -292,12 +356,16 @@ return matchesSearch && matchesFilter && matchesStatus;
 
         const statusCell = document.createElement("td");
 
-statusCell.textContent =
+const statusBadge = document.createElement("span");
+
+statusBadge.textContent =
     transaction.status === "pending" ? "Pending" : "Completed";
 
-statusCell.className = transaction.status === "pending"
-    ? "pending"
-    : "completed";
+statusBadge.className = transaction.status === "pending"
+    ? "status-badge pending"
+    : "status-badge completed";
+
+statusCell.appendChild(statusBadge);
 
         const actionCell = document.createElement("td");
         if (isAdmin()) {
@@ -315,7 +383,18 @@ statusCell.className = transaction.status === "pending"
 
     actionCell.appendChild(completeButton);
 }
+// Edit transaction button
+const editButton = document.createElement("button");
 
+editButton.textContent = "Edit";
+
+editButton.className = "edit-button";
+
+editButton.addEventListener("click", function() {
+    editTransaction(transaction.id);
+});
+
+actionCell.appendChild(editButton);
         const deleteButton = document.createElement("button");
 
         deleteButton.textContent = "Delete";
@@ -340,8 +419,76 @@ statusCell.className = transaction.status === "pending"
 
         allTransactionsList.appendChild(row);
 
+});
+
+updateTransactionSummary();
+updateCardSpending();
+updateCardSpendingBreakdown();
+}
+
+function updateCardSpendingBreakdown() {
+
+    const categoryTotals = {};
+
+    transactions.forEach(function(transaction) {
+
+        if (
+            transaction.type === "expense" &&
+            transaction.status === "completed"
+        ) {
+            const category = transaction.category || "Other";
+
+            categoryTotals[category] =
+                (categoryTotals[category] || 0) +
+                Number(transaction.amount);
+        }
+
     });
 
+    const breakdownContainer =
+        document.getElementById("card-spending-breakdown");
+
+    breakdownContainer.innerHTML = "";
+
+    const categories = Object.entries(categoryTotals);
+
+    const totalSpending = categories.reduce(function(total, item) {
+        return total + item[1];
+    }, 0);
+
+    if (categories.length === 0) {
+        breakdownContainer.textContent = "No completed expenses yet.";
+        return;
+    }
+
+    categories.forEach(function(item) {
+
+        const category = item[0];
+        const amount = item[1];
+
+        const percentage = totalSpending > 0
+            ? (amount / totalSpending) * 100
+            : 0;
+
+        const categoryElement = document.createElement("div");
+        categoryElement.className = "spending-category";
+
+        categoryElement.innerHTML = `
+            <div class="spending-category-info">
+                <span>${category}</span>
+                <strong>${formatMoney(amount)}</strong>
+            </div>
+
+            <div class="spending-progress">
+                <div class="spending-progress-fill"
+                     style="width: ${percentage}%">
+                </div>
+            </div>
+        `;
+
+        breakdownContainer.appendChild(categoryElement);
+
+    });
 }
 
 // Complete a pending transaction
@@ -470,8 +617,6 @@ transactionForm.addEventListener("submit", async function(event) {
 
     transactions.unshift(newTransaction);
 
-    transactions.unshift(newTransaction);
-
     // Create transaction notification
     notifications.unshift({
         title: "New Transaction Added",
@@ -495,6 +640,164 @@ transactionForm.addEventListener("submit", async function(event) {
 
 });
 
+// Edit an existing transaction
+let editingTransactionId = null;
+
+function editTransaction(id) {
+
+    if (!isAdmin()) {
+        alert("You are not authorized to edit transactions.");
+        return;
+    }
+
+    const transaction = transactions.find(function(item) {
+        return Number(item.id) === Number(id);
+    });
+
+    if (!transaction) return;
+
+    editingTransactionId = id;
+
+    document.getElementById("edit-description").value =
+        transaction.description;
+
+    document.getElementById("edit-amount").value =
+        transaction.amount;
+
+    document.getElementById("edit-category").value =
+        transaction.category;
+
+    document.getElementById("edit-type").value =
+        transaction.type;
+
+    document.getElementById("edit-status").value =
+        transaction.status;
+
+    document.getElementById("edit-transaction-modal").hidden = false;
+}
+
+// Save edited transaction
+document.getElementById("edit-transaction-form")
+.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    if (!isAdmin() || editingTransactionId === null) {
+        return;
+    }
+
+    const transaction = transactions.find(function(item) {
+        return Number(item.id) === Number(editingTransactionId);
+    });
+
+    if (!transaction) return;
+
+    const newDescription =
+        document.getElementById("edit-description").value.trim();
+
+    const newAmount =
+        Number(document.getElementById("edit-amount").value);
+
+    const newCategory =
+        document.getElementById("edit-category").value.trim();
+
+    const newType =
+        document.getElementById("edit-type").value;
+
+    const newStatus =
+        document.getElementById("edit-status").value;
+
+    if (!newDescription || !newCategory ||
+        !Number.isFinite(newAmount) || newAmount <= 0) {
+
+        alert("Please enter valid transaction details.");
+        return;
+    }
+
+    // Remember previous financial values
+    const oldAmount = transaction.amount;
+    const oldType = transaction.type;
+    const oldStatus = transaction.status;
+
+    // Calculate previous financial contributions
+    const oldIncome = oldType === "income" ? oldAmount : 0;
+    const oldExpenses = oldType === "expense" ? oldAmount : 0;
+
+    const oldBalance = oldStatus === "completed"
+        ? (oldType === "income" ? oldAmount : -oldAmount)
+        : 0;
+
+    // Calculate new financial contributions
+    const newIncome = newType === "income" ? newAmount : 0;
+    const newExpenses = newType === "expense" ? newAmount : 0;
+
+    const newBalance = newStatus === "completed"
+        ? (newType === "income" ? newAmount : -newAmount)
+        : 0;
+
+    // Update Supabase
+    const { error } = await supabaseClient
+        .from("transactions")
+        .update({
+            description: newDescription,
+            amount: newAmount,
+            category: newCategory,
+            type: newType,
+            status: newStatus
+        })
+        .eq("id", editingTransactionId);
+
+    if (error) {
+        console.error("Transaction update failed:", error);
+        alert("Could not update transaction. Please try again.");
+        return;
+    }
+
+    // Update local transaction
+    transaction.description = newDescription;
+    transaction.amount = newAmount;
+    transaction.category = newCategory;
+    transaction.type = newType;
+    transaction.status = newStatus;
+
+    // Update financial totals
+    income += newIncome - oldIncome;
+    expenses += newExpenses - oldExpenses;
+    balance += newBalance - oldBalance;
+
+    saveData();
+
+    await saveBankSettingsToSupabase();
+
+    updateBalance();
+    displayTransactions();
+    displayDashboardTransactions();
+    updateAnalytics();
+
+    document.getElementById("edit-transaction-modal").hidden = true;
+
+    editingTransactionId = null;
+
+    alert("Transaction updated successfully!");
+
+});
+
+// Close edit transaction modal
+function closeEditTransactionModal() {
+
+    document.getElementById("edit-transaction-modal").hidden = true;
+
+    editingTransactionId = null;
+
+}
+
+// Cancel button
+document.getElementById("cancel-edit")
+.addEventListener("click", closeEditTransactionModal);
+
+// Close icon button
+document.getElementById("close-edit-modal")
+.addEventListener("click", closeEditTransactionModal);
 
 // 8. Delete transactions
 
@@ -579,15 +882,47 @@ function displayDashboardTransactions() {
 
         const row = document.createElement("tr");
 
+        // Description and category icon
         const descriptionCell = document.createElement("td");
-        descriptionCell.textContent = transaction.description;
 
+        const transactionInfo = document.createElement("div");
+        transactionInfo.className = "transaction-description";
+
+        const icon = document.createElement("span");
+        icon.className = "transaction-icon";
+
+        const category = (transaction.category || "").toLowerCase();
+
+        if (category.includes("food")) {
+            icon.textContent = "🍽️";
+        } else if (category.includes("shopping")) {
+            icon.textContent = "🛍️";
+        } else if (category.includes("transport")) {
+            icon.textContent = "🚗";
+        } else if (category.includes("entertainment")) {
+            icon.textContent = "🎬";
+        } else if (transaction.type === "income") {
+            icon.textContent = "💰";
+        } else {
+            icon.textContent = "💳";
+        }
+
+        const description = document.createElement("strong");
+        description.textContent = transaction.description;
+
+        transactionInfo.appendChild(icon);
+        transactionInfo.appendChild(description);
+        descriptionCell.appendChild(transactionInfo);
+
+        // Category
         const categoryCell = document.createElement("td");
         categoryCell.textContent = transaction.category;
 
+        // Date
         const dateCell = document.createElement("td");
         dateCell.textContent = transaction.date;
 
+        // Amount
         const amountCell = document.createElement("td");
 
         amountCell.textContent =
@@ -596,13 +931,17 @@ function displayDashboardTransactions() {
 
         amountCell.className = transaction.type;
 
+        // Status
         const statusCell = document.createElement("td");
 
-        statusCell.textContent =
+        const statusBadge = document.createElement("span");
+        statusBadge.className = "transaction-status " +
+            (transaction.status === "pending" ? "pending" : "completed");
+
+        statusBadge.textContent =
             transaction.status === "pending" ? "Pending" : "Completed";
 
-        statusCell.className =
-            transaction.status === "pending" ? "pending" : "completed";
+        statusCell.appendChild(statusBadge);
 
         row.appendChild(descriptionCell);
         row.appendChild(categoryCell);
@@ -1120,17 +1459,33 @@ function displaySavingsGoals() {
 
         if (isAdmin()) {
 
+    if (isAdmin()) {
+
+    const actions = document.createElement("div");
+    actions.className = "savings-goal-actions";
+
     const addButton = document.createElement("button");
-
     addButton.textContent = "Add Money";
-
     addButton.className = "add-savings";
-
     addButton.dataset.id = goal.id;
 
-    goalCard.appendChild(addButton);
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.className = "edit-savings";
+    editButton.dataset.id = goal.id;
 
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.className = "delete-savings";
+    deleteButton.dataset.id = goal.id;
+
+    actions.appendChild(addButton);
+    actions.appendChild(editButton);
+    actions.appendChild(deleteButton);
+
+    goalCard.appendChild(actions);
 }
+        }
         goalCard.appendChild(heading);
         goalCard.appendChild(amounts);
         goalCard.appendChild(progressBar);
@@ -1206,24 +1561,29 @@ savingsForm.addEventListener("submit", async function(event) {
 });
 
 savingsGoalsList.addEventListener("click", async function(event) {
-    
 
+    const goalId = Number(event.target.dataset.id);
+
+    const goal = savingsGoals.find(function(item) {
+        return item.id === goalId;
+    });
+
+    if (!goal) return;
+
+
+    // ADD MONEY
     if (event.target.classList.contains("add-savings")) {
+
         if (!isAdmin()) {
-        alert("You are not authorized to update savings.");
-        return;
-    }
-        const goalId = Number(event.target.dataset.id);
+            alert("You are not authorized to update savings.");
+            return;
+        }
 
-        const goal = savingsGoals.find(function(item) {
-            return item.id === goalId;
-        });
+        const amountInput = prompt("How much would you like to add?");
 
-        if (!goal) return;
+        if (amountInput === null) return;
 
-        const amount = Number(
-            prompt("How much would you like to add?")
-        );
+        const amount = Number(amountInput);
 
         if (!Number.isFinite(amount) || amount <= 0) {
             alert("Please enter a valid amount.");
@@ -1231,8 +1591,8 @@ savingsGoalsList.addEventListener("click", async function(event) {
         }
 
         const newSavedAmount = Math.min(
-            goal.saved + amount,
-            goal.target
+            Number(goal.saved || 0) + amount,
+            Number(goal.target)
         );
 
         const { error } = await supabaseClient
@@ -1252,10 +1612,108 @@ savingsGoalsList.addEventListener("click", async function(event) {
 
         saveSavingsGoals();
         displaySavingsGoals();
-        displayDashboardSavingsGoals();
 
         alert("Your savings have been updated!");
     }
+
+
+    // EDIT SAVINGS GOAL
+    else if (event.target.classList.contains("edit-savings")) {
+
+        if (!isAdmin()) {
+            alert("You are not authorized to edit savings goals.");
+            return;
+        }
+
+        const nameInput = prompt("Enter the new goal name:", goal.name);
+
+        if (nameInput === null) return;
+
+        const newName = nameInput.trim();
+
+        if (!newName) {
+            alert("Please enter a valid goal name.");
+            return;
+        }
+
+        const targetInput = prompt(
+            "Enter the new target amount:",
+            goal.target
+        );
+
+        if (targetInput === null) return;
+
+        const newTarget = Number(targetInput);
+
+        if (!Number.isFinite(newTarget) || newTarget <= 0) {
+            alert("Please enter a valid target amount.");
+            return;
+        }
+
+        if (newTarget < Number(goal.saved || 0)) {
+            alert("The target cannot be less than the amount already saved.");
+            return;
+        }
+
+        const { error } = await supabaseClient
+            .from("savings_goals")
+            .update({
+                name: newName,
+                target: newTarget
+            })
+            .eq("id", goalId);
+
+        if (error) {
+            console.error("Could not edit savings goal:", error);
+            alert("The savings goal could not be edited. Please try again.");
+            return;
+        }
+
+        goal.name = newName;
+        goal.target = newTarget;
+
+        saveSavingsGoals();
+        displaySavingsGoals();
+
+        alert("Savings goal updated successfully!");
+    }
+
+
+    // DELETE SAVINGS GOAL
+    else if (event.target.classList.contains("delete-savings")) {
+
+        if (!isAdmin()) {
+            alert("You are not authorized to delete savings goals.");
+            return;
+        }
+
+        const confirmed = confirm(
+            "Are you sure you want to delete this savings goal?"
+        );
+
+        if (!confirmed) return;
+
+        const { error } = await supabaseClient
+            .from("savings_goals")
+            .delete()
+            .eq("id", goalId);
+
+        if (error) {
+            console.error("Could not delete savings goal:", error);
+            alert("The savings goal could not be deleted. Please try again.");
+            return;
+        }
+
+        savingsGoals = savingsGoals.filter(function(item) {
+            return item.id !== goalId;
+        });
+
+        saveSavingsGoals();
+        displaySavingsGoals();
+
+        alert("Savings goal deleted successfully!");
+    }
+
 });
 
 function displayDashboardSavingsGoals() {
@@ -1270,19 +1728,34 @@ function displayDashboardSavingsGoals() {
         const goalItem = document.createElement("div");
         goalItem.className = "goal-item";
 
-        const goalInfo = document.createElement("div");
-        goalInfo.className = "goal-info";
+        const goalHeader = document.createElement("div");
+        goalHeader.className = "goal-header";
+
+        const goalTitle = document.createElement("div");
+        goalTitle.className = "goal-title";
+
+        const icon = document.createElement("span");
+        icon.className = "goal-icon";
+        icon.textContent = "🎯";
 
         const name = document.createElement("strong");
         name.textContent = goal.name;
 
-        const amount = document.createElement("span");
-        amount.textContent =
-            formatMoney(goal.saved) + " / " +
-            formatMoney(goal.target);
+        goalTitle.appendChild(icon);
+        goalTitle.appendChild(name);
 
-        goalInfo.appendChild(name);
-        goalInfo.appendChild(amount);
+        const percentageLabel = document.createElement("span");
+        percentageLabel.className = "goal-percentage";
+        percentageLabel.textContent = Math.round(percentage) + "%";
+
+        goalHeader.appendChild(goalTitle);
+        goalHeader.appendChild(percentageLabel);
+
+        const amount = document.createElement("div");
+        amount.className = "goal-amount";
+        amount.textContent =
+            formatMoney(goal.saved) + " of " +
+            formatMoney(goal.target);
 
         const goalBar = document.createElement("div");
         goalBar.className = "goal-bar";
@@ -1294,10 +1767,11 @@ function displayDashboardSavingsGoals() {
         goalBar.appendChild(progress);
 
         const completed = document.createElement("small");
-        completed.textContent =
-            Math.round(percentage) + "% completed";
+        completed.className = "goal-completed";
+        completed.textContent = "Goal progress";
 
-        goalItem.appendChild(goalInfo);
+        goalItem.appendChild(goalHeader);
+        goalItem.appendChild(amount);
         goalItem.appendChild(goalBar);
         goalItem.appendChild(completed);
 
@@ -1912,9 +2386,19 @@ async function loadTransactionsFromSupabase() {
 
     // Sort database records before formatting their dates
     data.sort(function(a, b) {
-        return getTransactionTimestamp(b.transaction_date) -
-               getTransactionTimestamp(a.transaction_date);
-    });
+
+    const dateDifference =
+        getTransactionTimestamp(b.transaction_date) -
+        getTransactionTimestamp(a.transaction_date);
+
+    if (dateDifference !== 0) {
+        return dateDifference;
+    }
+
+    return new Date(b.created_at).getTime() -
+           new Date(a.created_at).getTime();
+
+});
 
     // Convert database records into website transactions
     transactions = data.map(function(item) {

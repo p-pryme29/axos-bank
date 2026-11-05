@@ -90,8 +90,18 @@
 </div>
 
         <div class="profile">
+
+    <img
+    id="profile-picture"
+    class="profile-picture"
+    src="profile.jpg"
+    alt="Profile picture"
+>
+
     <span id="profile-initials">NL</span>
+
     <p id="dashboard-profile-name">Nora Latham</p>
+
 </div>
         <button type="button" id="logout-button" class="logout-button">
     Log Out
@@ -202,51 +212,57 @@
                     <p class="section-description">Your monthly expenses</p>
 
                     <div class="expense-item">
-                        <div class="expense-info">
-                            <span>Food & Dining</span>
-                            <strong>$850</strong>
-                        </div>
+    <div class="expense-info">
+        <div class="expense-category">
+            <span class="category-icon">🍽️</span>
+            <span>Food & Dining</span>
+        </div>
+        <strong>$850</strong>
+    </div>
+    <div class="progress-bar">
+        <div class="progress food"></div>
+    </div>
+</div>
 
-                        <div class="progress-bar">
-                            <div class="progress food"></div>
-                        </div>
-                    </div>
+<div class="expense-item">
+    <div class="expense-info">
+        <div class="expense-category">
+            <span class="category-icon">🛍️</span>
+            <span>Shopping</span>
+        </div>
+        <strong>$620</strong>
+    </div>
+    <div class="progress-bar">
+        <div class="progress shopping"></div>
+    </div>
+</div>
 
-                    <div class="expense-item">
-                        <div class="expense-info">
-                            <span>Shopping</span>
-                            <strong>$620</strong>
-                        </div>
+<div class="expense-item">
+    <div class="expense-info">
+        <div class="expense-category">
+            <span class="category-icon">🚗</span>
+            <span>Transportation</span>
+        </div>
+        <strong>$420</strong>
+    </div>
+    <div class="progress-bar">
+        <div class="progress transport"></div>
+    </div>
+</div>
 
-                        <div class="progress-bar">
-                            <div class="progress shopping"></div>
-                        </div>
-                    </div>
-
-                    <div class="expense-item">
-                        <div class="expense-info">
-                            <span>Transportation</span>
-                            <strong>$420</strong>
-                        </div>
-
-                        <div class="progress-bar">
-                            <div class="progress transport"></div>
-                        </div>
-                    </div>
-
-                    <div class="expense-item">
-                        <div class="expense-info">
-                            <span>Entertainment</span>
-                            <strong>$250</strong>
-                        </div>
-
-                        <div class="progress-bar">
-                            <div class="progress entertainment"></div>
-                        </div>
-                    </div>
-
-                </div>
-
+<div class="expense-item">
+    <div class="expense-info">
+        <div class="expense-category">
+            <span class="category-icon">🎬</span>
+            <span>Entertainment</span>
+        </div>
+        <strong>$250</strong>
+    </div>
+    <div class="progress-bar">
+        <div class="progress entertainment"></div>
+    </div>
+</div>
+</div>
 
                 <!-- SAVINGS GOALS -->
 
@@ -293,15 +309,64 @@
 
         <!-- TRANSACTIONS PAGE -->
 
-        <div class="page-section" id="transactions" hidden>
+<div class="page-section" id="transactions" hidden>
 
-    <h1>Transactions</h1>
+    <div class="transactions-header">
 
-    <p>Manage and review your financial activity.</p>
+        <div>
+            <span class="transactions-eyebrow">ACCOUNT ACTIVITY</span>
 
-    <div class="page-card">
+            <h1>Transactions</h1>
 
-        <h2>All Transactions</h2>
+            <p>Track, manage and review all your financial activity.</p>
+        </div>
+
+    </div>
+
+    <!-- TRANSACTION SUMMARY CARDS -->
+
+<div class="transaction-summary-grid">
+
+    <div class="transaction-summary-card">
+        <div class="summary-card-icon">↔</div>
+        <p>Total Transactions</p>
+        <h2 id="total-transactions-count">0</h2>
+        <span>All recorded transactions</span>
+    </div>
+
+    <div class="transaction-summary-card">
+        <div class="summary-card-icon income-icon">↓</div>
+        <p>Money In</p>
+        <h2 id="transaction-income-total">$0.00</h2>
+        <span>Total income</span>
+    </div>
+
+    <div class="transaction-summary-card">
+        <div class="summary-card-icon expense-icon">↑</div>
+        <p>Money Out</p>
+        <h2 id="transaction-expenses-total">$0.00</h2>
+        <span>Total expenses</span>
+    </div>
+
+    <div class="transaction-summary-card">
+        <div class="summary-card-icon pending-icon">◷</div>
+        <p>Pending</p>
+        <h2 id="pending-transactions-count">0</h2>
+        <span>Awaiting completion</span>
+    </div>
+
+</div>
+
+    <div class="page-card transactions-card">
+
+        <div class="transactions-card-header">
+
+            <div>
+                <h2>All Transactions</h2>
+                <p>View and manage your account transactions.</p>
+            </div>
+
+        </div>
 
         <div class="transaction-controls">
 
@@ -309,19 +374,22 @@
                 type="text"
                 id="search-transaction"
                 placeholder="Search transactions..."
+                aria-label="Search transactions"
             >
 
-            <select id="filter-transaction">
+            <select id="filter-transaction" aria-label="Filter by transaction type">
 
-               <option value="all">All Transactions</option>
-    <option value="income">Income</option>
-    <option value="expense">Expenses</option>
-</select>
+                <option value="all">All Transactions</option>
+                <option value="income">Income</option>
+                <option value="expense">Expenses</option>
 
-<select id="filter-status">
-    <option value="all">All Statuses</option>
-    <option value="pending">Pending</option>
-    <option value="completed">Completed</option>
+            </select>
+
+            <select id="filter-status" aria-label="Filter by transaction status">
+
+                <option value="all">All Statuses</option>
+                <option value="pending">Pending</option>
+                <option value="completed">Completed</option>
 
             </select>
 
@@ -329,7 +397,7 @@
 
         <div class="table-container">
 
-            <table>
+            <table class="transactions-table">
 
                 <thead>
                     <tr>
@@ -356,12 +424,19 @@
 
         <!-- MY CARDS PAGE -->
 
-        <div class="page-section" id="cards" hidden>
+<div class="page-section" id="cards" hidden>
 
-    <h1>My Cards</h1>
-    <p>Manage your virtual and physical cards.</p>
+    <div class="cards-page-header">
+        <div>
+            <span class="cards-eyebrow">CARD SERVICES</span>
+            <h1>My Cards</h1>
+            <p>Manage your cards, security and spending activity.</p>
+        </div>
+    </div>
 
     <div class="cards-layout">
+
+        <!-- BANK CARD PREVIEW -->
 
         <div class="card-preview">
 
@@ -369,6 +444,8 @@
                 <h2>Axos Bank.</h2>
                 <span>VISA</span>
             </div>
+
+            <div class="card-chip"></div>
 
             <p class="card-label">CARD NUMBER</p>
 
@@ -392,14 +469,25 @@
 
         </div>
 
+        <!-- CARD MANAGEMENT -->
+
         <div class="card-management">
 
-            <h2>Card Management</h2>
+            <div class="card-management-heading">
+                <div>
+                    <h2>Card Management</h2>
+                    <p>Manage your card security and settings.</p>
+                </div>
 
-            <p>Manage your card security.</p>
+                <div class="card-security-icon">⌑</div>
+            </div>
 
             <div class="card-status">
-                <span>Card Status</span>
+                <div>
+                    <span>Card Status</span>
+                    <small>Current card availability</small>
+                </div>
+
                 <strong id="card-status">Active</strong>
             </div>
 
@@ -414,157 +502,229 @@
 
     </div>
 
+    <!-- CARD SPENDING -->
+
     <div class="page-card card-spending">
 
-        <h2>Card Spending</h2>
+        <div class="card-spending-header">
+            <div>
+                <span class="cards-eyebrow">SPENDING OVERVIEW</span>
+                <h2>Card Spending</h2>
+                <p>Your card spending overview.</p>
+            </div>
 
-        <p>Your card spending overview.</p>
+            <div class="spending-icon">↗</div>
+        </div>
 
-        <h1>$2,450.00</h1>
-
+        <h1 id="card-monthly-spending">$2,450.00</h1>
         <span>This month's spending</span>
 
     </div>
+    <!-- CARD SPENDING BREAKDOWN -->
+
+<div class="page-card card-breakdown">
+
+    <div class="card-spending-header">
+        <div>
+            <span class="cards-eyebrow">SPENDING CATEGORIES</span>
+            <h2>Spending Breakdown</h2>
+            <p>See where your money goes.</p>
+        </div>
+    </div>
+
+    <div id="card-spending-breakdown">
+        <!-- Spending categories will appear here -->
+    </div>
 
 </div>
 
+</div>
 
-        <!-- ANALYTICS PAGE -->
+       <!-- ANALYTICS PAGE -->
+<div class="page-section" id="analytics" hidden>
 
-        <div class="page-section" id="analytics" hidden>
+    <!-- PAGE HEADER -->
+    <div class="analytics-page-header">
+        <div>
+            <span class="analytics-eyebrow">FINANCIAL OVERVIEW</span>
+            <h1>Analytics</h1>
+            <p>Understand your finances and make smarter financial decisions.</p>
+        </div>
+    </div>
 
-    <h1>Analytics</h1>
-    <p>Understand your spending habits.</p>
+    <!-- FINANCIAL OVERVIEW -->
+    <div class="analytics-overview">
 
-    <div class="overview analytics-overview">
-
-        <div class="overview-card">
+        <div class="overview-card analytics-stat-card">
+            <div class="analytics-stat-icon income-stat-icon">↓</div>
             <p>Total Income</p>
             <h2 id="analytics-income">$0.00</h2>
+            <span>Your recorded income</span>
         </div>
 
-        <div class="overview-card">
+        <div class="overview-card analytics-stat-card">
+            <div class="analytics-stat-icon expense-stat-icon">↑</div>
             <p>Total Expenses</p>
             <h2 id="analytics-expenses">$0.00</h2>
+            <span>Your recorded expenses</span>
         </div>
 
-        <div class="overview-card">
+        <div class="overview-card analytics-stat-card">
+            <div class="analytics-stat-icon pending-stat-icon">◷</div>
             <p>Pending Transactions</p>
             <h2 id="analytics-pending">0</h2>
+            <span>Awaiting completion</span>
         </div>
 
     </div>
 
-    <!-- Income and Expense Chart -->
+    <!-- CHARTS -->
+    <div class="analytics-chart-grid">
 
-<div class="analytics-chart-grid">
+        <div class="page-card chart-card">
+            <div class="analytics-card-heading">
+                <div>
+                    <span class="analytics-eyebrow">CASH FLOW</span>
+                    <h2>Income vs Expenses</h2>
+                    <p>Compare your income and spending.</p>
+                </div>
+            </div>
 
-    <div class="page-card chart-card">
+            <div class="chart-container">
+                <canvas id="incomeExpenseChart"></canvas>
+            </div>
+        </div>
 
-        <h2>Income vs Expenses</h2>
+        <div class="page-card chart-card">
+            <div class="analytics-card-heading">
+                <div>
+                    <span class="analytics-eyebrow">EXPENSE ANALYSIS</span>
+                    <h2>Spending Breakdown</h2>
+                    <p>See where your money goes.</p>
+                </div>
+            </div>
 
-        <p>Compare your income and spending</p>
-
-        <div class="chart-container">
-            <canvas id="incomeExpenseChart"></canvas>
+            <div class="chart-container">
+                <canvas id="spendingBreakdownChart"></canvas>
+            </div>
         </div>
 
     </div>
 
-    <!-- Spending Breakdown Chart -->
+    <!-- MONTHLY TRENDS -->
+    <div class="page-card chart-card trend-card">
 
-    <div class="page-card chart-card">
+        <div class="analytics-card-heading">
+            <div>
+                <span class="analytics-eyebrow">FINANCIAL PERFORMANCE</span>
+                <h2>Monthly Financial Trends</h2>
+                <p>Track your income and expenses over time.</p>
+            </div>
+        </div>
 
-        <h2>Spending Breakdown</h2>
-
-        <p>See where your money goes</p>
-
-        <div class="chart-container">
-            <canvas id="spendingBreakdownChart"></canvas>
+        <div class="chart-container trend-container">
+            <canvas id="monthlyTrendChart"></canvas>
         </div>
 
     </div>
 
-</div>
+    <!-- FINANCIAL INSIGHTS -->
+    <div class="analytics-insights">
 
-<!-- Monthly Financial Trends -->
+        <div class="page-card insight-card">
+            <div class="insight-icon">%</div>
+            <p>Savings Rate</p>
+            <h2 id="insight-savings-rate">0%</h2>
+            <span>Your income retained after expenses</span>
+        </div>
 
-<div class="page-card chart-card trend-card">
+        <div class="page-card insight-card">
+            <div class="insight-icon">◎</div>
+            <p>Top Spending Category</p>
+            <h2 id="insight-top-category">N/A</h2>
+            <span>Your highest spending category</span>
+        </div>
 
-    <h2>Monthly Financial Trends</h2>
+        <div class="page-card insight-card">
+            <div class="insight-icon">↗</div>
+            <p>Net Cash Flow</p>
+            <h2 id="insight-cash-flow">$0.00</h2>
+            <span>Income minus expenses</span>
+        </div>
 
-    <p>Track your income and expenses over time</p>
+        <div class="page-card insight-card">
+            <div class="insight-icon">✓</div>
+            <p>Completed Transactions</p>
+            <h2 id="insight-completed-count">0</h2>
+            <span>Successfully completed transactions</span>
+        </div>
 
-    <div class="chart-container trend-container">
-        <canvas id="monthlyTrendChart"></canvas>
-    </div>
-    <!-- Financial Insights -->
-
-<div class="analytics-insights">
-
-    <div class="page-card insight-card">
-        <p>Savings Rate</p>
-        <h2 id="insight-savings-rate">0%</h2>
-        <span>Your income retained after expenses</span>
-    </div>
-
-    <div class="page-card insight-card">
-        <p>Top Spending Category</p>
-        <h2 id="insight-top-category">N/A</h2>
-        <span>Your highest spending category</span>
-    </div>
-
-    <div class="page-card insight-card">
-        <p>Net Cash Flow</p>
-        <h2 id="insight-cash-flow">$0.00</h2>
-        <span>Income minus expenses</span>
     </div>
 
-    <div class="page-card insight-card">
-        <p>Completed Transactions</p>
-        <h2 id="insight-completed-count">0</h2>
-        <span>Successfully completed transactions</span>
+    <!-- SPENDING BY CATEGORY -->
+    <div class="page-card analytics-breakdown">
+
+        <div class="analytics-card-heading">
+            <div>
+                <span class="analytics-eyebrow">SPENDING DETAILS</span>
+                <h2>Spending by Category</h2>
+                <p>Your expense breakdown by category.</p>
+            </div>
+        </div>
+
+        <div id="category-breakdown"></div>
+
     </div>
 
-</div>
-
-</div>
-
-<!-- Spending by Category -->
-
-<div class="page-card analytics-breakdown">
-
-    <h2>Spending by Category</h2>
-
-    <p>Your expense breakdown</p>
-
-    <div id="category-breakdown"></div>
-
-</div>
 </div>
 
         <!-- SAVINGS PAGE -->
 
-        <div class="page-section" id="savings" hidden>
-    <h1>Savings Goals</h1>
-    <p>Set goals and track your savings progress.</p>
+<div class="page-section" id="savings" hidden>
 
-    <div class="savings-summary">
-        <div class="overview-card">
-            <p>Total Saved</p>
-            <h2 id="total-saved">$0.00</h2>
-        </div>
-
-        <div class="overview-card">
-            <p>Active Goals</p>
-            <h2 id="active-goals">0</h2>
+    <div class="savings-page-header">
+        <div>
+            <span class="savings-eyebrow">FINANCIAL PLANNING</span>
+            <h1>Savings Goals</h1>
+            <p>Build your future, one savings goal at a time.</p>
         </div>
     </div>
 
+    <!-- SAVINGS OVERVIEW -->
+
+    <div class="savings-summary">
+
+        <div class="overview-card">
+            <div class="savings-card-icon">$
+            </div>
+            <p>Total Saved</p>
+            <h2 id="total-saved">$0.00</h2>
+            <span>Across all savings goals</span>
+        </div>
+
+        <div class="overview-card">
+            <div class="savings-card-icon goals-icon">◎</div>
+            <p>Active Goals</p>
+            <h2 id="active-goals">0</h2>
+            <span>Your ongoing savings goals</span>
+        </div>
+
+    </div>
+
+    <!-- CREATE SAVINGS GOAL -->
+
     <div class="page-card savings-form-card">
-        <h2>Create a Savings Goal</h2>
+
+        <div class="savings-section-heading">
+            <div>
+                <span class="savings-eyebrow">START SAVING</span>
+                <h2>Create a Savings Goal</h2>
+                <p>Give your next financial milestone a name.</p>
+            </div>
+        </div>
 
         <form id="savings-form" data-admin-only>
+
             <label for="goal-name">Goal Name</label>
             <input
                 type="text"
@@ -584,13 +744,27 @@
             >
 
             <button type="submit">Create Goal</button>
+
         </form>
+
     </div>
 
+    <!-- SAVINGS GOALS LIST -->
+
     <div class="savings-goals-container">
-        <h2>Your Savings Goals</h2>
+
+        <div class="savings-section-heading">
+            <div>
+                <span class="savings-eyebrow">YOUR PROGRESS</span>
+                <h2>Your Savings Goals</h2>
+                <p>Keep track of your financial milestones.</p>
+            </div>
+        </div>
+
         <div id="savings-goals-list"></div>
+
     </div>
+
 </div>
 
 
@@ -687,6 +861,49 @@
     })();
 </script>
 
+<!-- EDIT TRANSACTION MODAL -->
+<div id="edit-transaction-modal" class="edit-modal" hidden>
+
+    <div class="edit-modal-content">
+
+        <div class="edit-modal-header">
+            <h2>Edit Transaction</h2>
+            <button type="button" id="close-edit-modal">&times;</button>
+        </div>
+
+        <form id="edit-transaction-form">
+
+            <label for="edit-description">Description</label>
+            <input type="text" id="edit-description" required>
+
+            <label for="edit-amount">Amount ($)</label>
+            <input type="number" id="edit-amount" min="0.01" step="0.01" required>
+
+            <label for="edit-category">Category</label>
+            <input type="text" id="edit-category" required>
+
+            <label for="edit-type">Transaction Type</label>
+            <select id="edit-type">
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+
+            <label for="edit-status">Status</label>
+            <select id="edit-status">
+                <option value="completed">Completed</option>
+                <option value="pending">Pending</option>
+            </select>
+
+            <div class="edit-modal-actions">
+                <button type="button" id="cancel-edit">Cancel</button>
+                <button type="submit" id="save-edit">Save Changes</button>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
 
 </body>
 

@@ -49,5 +49,3 @@ function isAdmin() {
 function isVisitor() {
     return getUserRole() === "visitor";
 }
-
-testSupabaseConnection();
