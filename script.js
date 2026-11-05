@@ -2496,5 +2496,11 @@ document.addEventListener("keydown", function(event) {
         closeMobileMenu();
     }
 });
+// CLOSE NOTIFICATION PANEL
 
+document.getElementById("close-notifications").addEventListener("click", function() {
+
+    document.getElementById("notification-panel").classList.remove("show");
+
+});
 initializeWebsite();

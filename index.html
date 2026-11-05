@@ -77,9 +77,20 @@
     <div class="notification-panel" id="notification-panel">
 
         <div class="notification-header">
-            <h3>Notifications</h3>
-           <button type="button" id="clear-notifications" data-admin-only>Clear all</button>
-        </div>
+
+    <h3>Notifications</h3>
+
+    <div class="notification-header-actions">
+        <button type="button" id="clear-notifications" data-admin-only>
+            Clear all
+        </button>
+
+        <button type="button" id="close-notifications" aria-label="Close notifications">
+            ×
+        </button>
+    </div>
+
+</div>>
 
         <div class="notification-list" id="notification-list">
             <p class="empty-notifications">You're all caught up!</p>
