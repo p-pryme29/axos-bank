@@ -4767,3 +4767,1054 @@ body.dark-mode .notification-item p {
 [data-admin-only][hidden] {
     display: none !important;
 }
+/* ==========================================
+   AXOS BANK — MODERN PREMIUM REDESIGN
+   STEP 1: DESIGN FOUNDATION & DASHBOARD
+   ========================================== */
+
+:root {
+    --axos-navy: #102B4E;
+    --axos-blue: #1C4D7C;
+    --axos-accent: #2878D0;
+    --axos-light-blue: #EAF3FC;
+    --axos-background: #F4F7FB;
+    --axos-white: #FFFFFF;
+    --axos-text: #172B45;
+    --axos-muted: #718096;
+    --axos-border: #E5EBF2;
+    --axos-radius: 18px;
+    --axos-shadow: 0 8px 28px rgba(16, 43, 78, 0.06);
+}
+
+body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background: var(--axos-background);
+    color: var(--axos-text);
+    -webkit-font-smoothing: antialiased;
+}
+
+.dashboard {
+    background: var(--axos-background);
+}
+
+/* Sidebar */
+
+.sidebar {
+    background: var(--axos-navy);
+    width: 260px;
+    padding: 34px 20px;
+    border-right: none;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 55px;
+}
+
+.sidebar .navigation {
+    gap: 8px;
+}
+
+.sidebar .navigation .nav-link {
+    padding: 15px 17px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.25s ease;
+}
+
+.sidebar .navigation .nav-link:hover {
+    background: rgba(255, 255, 255, 0.10);
+    transform: translateX(3px);
+}
+
+.sidebar .navigation .nav-link.active {
+    background: linear-gradient(120deg, #2878D0, #398FE8);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+}
+
+/* Main content */
+
+.main-content {
+    padding: 38px 42px;
+    background: var(--axos-background);
+    min-width: 0;
+}
+
+/* Header */
+
+.header {
+    margin-bottom: 32px;
+    gap: 20px;
+}
+
+.header h1 {
+    color: var(--axos-navy);
+    font-size: 29px;
+    font-weight: 750;
+    letter-spacing: -1px;
+}
+
+.header p {
+    color: var(--axos-muted);
+    line-height: 1.6;
+}
+
+/* Profile */
+
+.profile {
+    background: var(--axos-white);
+    border: 1px solid var(--axos-border);
+    border-radius: 14px;
+    padding: 8px 15px;
+    box-shadow: var(--axos-shadow);
+}
+
+.profile span {
+    background: linear-gradient(135deg, var(--axos-navy), var(--axos-accent));
+}
+
+.profile-picture {
+    border: 2px solid var(--axos-light-blue);
+}
+
+.profile p {
+    color: var(--axos-navy);
+    font-weight: 700;
+}
+
+/* Notification button */
+
+.notification-button {
+    border: 1px solid var(--axos-border);
+    border-radius: 13px;
+    background: white;
+    color: var(--axos-navy);
+    box-shadow: var(--axos-shadow);
+}
+
+.notification-button:hover {
+    background: var(--axos-light-blue);
+    border-color: #B9D5F2;
+}
+
+/* Main balance card */
+
+.balance-card {
+    background:
+        radial-gradient(circle at 90% 10%, rgba(80, 160, 240, 0.25), transparent 35%),
+        linear-gradient(120deg, #102B4E 0%, #174875 60%, #2267A6 100%);
+    border-radius: 24px;
+    padding: 44px;
+    min-height: 215px;
+    box-shadow: 0 18px 40px rgba(16, 43, 78, 0.18);
+}
+
+.balance-card p {
+    color: #D8E8F8;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+}
+
+.balance-card h2 {
+    color: #FFFFFF;
+    font-size: clamp(30px, 4vw, 42px);
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+/* Financial overview cards */
+
+.overview {
+    gap: 20px;
+    margin-bottom: 32px;
+}
+
+.overview-card {
+    background: var(--axos-white);
+    border: 1px solid var(--axos-border);
+    border-radius: var(--axos-radius);
+    padding: 27px;
+    box-shadow: var(--axos-shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.overview-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 13px 30px rgba(16, 43, 78, 0.09);
+}
+
+.overview-card p {
+    color: var(--axos-muted);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.overview-card h2 {
+    color: var(--axos-navy);
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.7px;
+}
+
+/* General page sections */
+
+.page-card,
+.transactions,
+.analytics-card,
+.savings-card,
+.card-management {
+    background: var(--axos-white);
+    border: 1px solid var(--axos-border);
+    border-radius: var(--axos-radius);
+    box-shadow: var(--axos-shadow);
+}
+
+.page-card {
+    padding: 30px;
+}
+
+.page-card h2,
+.transactions h2,
+.analytics-card h2,
+.savings-card h2 {
+    color: var(--axos-navy);
+    font-weight: 750;
+}
+
+/* Section descriptions */
+
+.section-description {
+    color: var(--axos-muted);
+    line-height: 1.7;
+}
+
+/* General transitions */
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+button {
+    transition: all 0.2s ease;
+}
+
+/* Responsive foundation */
+
+@media (max-width: 900px) {
+    .main-content {
+        padding: 28px;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-content {
+        padding: 22px 16px 90px;
+    }
+
+    .header {
+        align-items: flex-start;
+        margin-bottom: 24px;
+        gap: 15px;
+    }
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .header-actions {
+        gap: 10px;
+    }
+
+    .balance-card {
+        padding: 28px 24px;
+        min-height: 175px;
+        border-radius: 20px;
+    }
+
+    .balance-card h2 {
+        font-size: 30px;
+    }
+
+    .overview {
+        gap: 12px;
+    }
+
+    .overview-card {
+        padding: 18px 14px;
+        border-radius: 15px;
+    }
+
+    .overview-card h2 {
+        font-size: 20px;
+    }
+
+    .overview-card p {
+        font-size: 12px;
+    }
+}
+/* ==========================================
+   AXOS BANK — STEP 2
+   TRANSACTIONS, FORMS & TABLES
+   ========================================== */
+
+/* Transaction containers */
+
+.transactions {
+    background: #FFFFFF;
+    border: 1px solid #E5EBF2;
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 8px 28px rgba(16, 43, 78, 0.05);
+}
+
+.transactions h2 {
+    color: #102B4E;
+    font-size: 20px;
+    font-weight: 750;
+    margin-bottom: 22px;
+}
+
+/* Tables */
+
+.transactions table,
+.transactions-table {
+    border: 1px solid #E5EBF2;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.transactions th,
+.transactions-table th {
+    background: #F3F7FC;
+    color: #64748B;
+    padding: 17px 18px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+}
+
+.transactions td,
+.transactions-table td {
+    padding: 17px 18px;
+    color: #334155;
+    font-size: 13px;
+    border-bottom: 1px solid #EDF1F6;
+}
+
+.transactions tbody tr:hover,
+.transactions-table tbody tr:hover {
+    background: #F5F9FE;
+}
+
+/* Income and expenses */
+
+.income {
+    color: #13845D;
+}
+
+.expense {
+    color: #D64545;
+}
+
+/* Transaction forms */
+
+.transaction-form {
+    background: #FFFFFF;
+    border: 1px solid #E5EBF2;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 28px rgba(16, 43, 78, 0.05);
+}
+
+.transaction-form h3 {
+    color: #102B4E;
+    font-size: 20px;
+    font-weight: 750;
+}
+
+.transaction-form input,
+.transaction-form select {
+    background: #F8FAFD;
+    color: #172B45;
+    border: 1px solid #DCE5EF;
+    border-radius: 11px;
+    padding: 15px;
+    font-size: 14px;
+}
+
+.transaction-form input:focus,
+.transaction-form select:focus {
+    border-color: #2878D0;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 4px rgba(40, 120, 208, 0.10);
+}
+
+.transaction-form button {
+    background: linear-gradient(120deg, #102B4E, #2878D0);
+    border-radius: 11px;
+    padding: 15px;
+    font-weight: 700;
+}
+
+.transaction-form button:hover {
+    background: #2878D0;
+    transform: translateY(-2px);
+}
+
+/* Search and filter fields */
+
+input,
+select,
+textarea {
+    border-radius: 10px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #2878D0;
+    box-shadow: 0 0 0 3px rgba(40, 120, 208, 0.10);
+}
+
+/* General buttons */
+
+button {
+    cursor: pointer;
+}
+
+button:focus-visible {
+    outline: 3px solid rgba(40, 120, 208, 0.35);
+    outline-offset: 3px;
+}
+
+/* Edit and transaction detail modals */
+
+.edit-modal,
+.transaction-details-modal {
+    background: rgba(9, 25, 45, 0.72);
+    backdrop-filter: blur(5px);
+}
+
+.edit-modal-content,
+.transaction-details-content {
+    background: #FFFFFF;
+    border: 1px solid #E5EBF2;
+    border-radius: 20px;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.22);
+}
+
+/* Notification panel */
+
+.notification-panel {
+    background: #FFFFFF;
+    border: 1px solid #E5EBF2;
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(16, 43, 78, 0.13);
+}
+
+.notification-header {
+    border-bottom: 1px solid #E5EBF2;
+}
+
+.notification-list {
+    color: #334155;
+}
+
+/* Mobile tables and forms */
+
+@media (max-width: 600px) {
+    .transactions {
+        padding: 18px 14px;
+        border-radius: 16px;
+    }
+
+    .transaction-form {
+        padding: 20px;
+        border-radius: 16px;
+    }
+
+    .transactions table,
+    .transactions-table {
+        font-size: 12px;
+    }
+
+    .transactions th,
+    .transactions-table th,
+    .transactions td,
+    .transactions-table td {
+        padding: 12px 10px;
+    }
+
+    .edit-modal-content,
+    .transaction-details-content {
+        padding: 22px;
+        border-radius: 17px;
+    }
+
+    .notification-panel {
+        width: min(320px, calc(100vw - 32px));
+        right: -5px;
+    }
+}
+/* ==========================================
+   AXOS BANK — STEP 3
+   CARDS, ANALYTICS & SAVINGS
+   ========================================== */
+
+/* Virtual bank card */
+
+.cards-layout {
+    gap: 28px;
+    margin-top: 28px;
+}
+
+.card-preview {
+    background:
+        radial-gradient(circle at 90% 10%, rgba(120, 190, 255, 0.25), transparent 35%),
+        linear-gradient(135deg, #102B4E, #174875 60%, #2878D0);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 22px;
+    padding: 32px;
+    min-height: 260px;
+    box-shadow: 0 18px 40px rgba(16,43,78,0.20);
+}
+
+.card-number {
+    font-size: 23px;
+    letter-spacing: 3px;
+    font-weight: 600;
+}
+
+.card-management {
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid #E5EBF2;
+    box-shadow: 0 8px 28px rgba(16,43,78,0.06);
+}
+
+.card-status {
+    background: #F3F7FC;
+    border-radius: 13px;
+    padding: 18px;
+}
+
+#card-status {
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+/* Card freeze button */
+
+.freeze-button {
+    border-radius: 11px;
+    padding: 15px;
+    font-weight: 700;
+}
+
+.freeze-button:hover {
+    transform: translateY(-2px);
+}
+
+/* Analytics panels */
+
+.insights-grid {
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.analytics-card,
+.savings-card {
+    background: #FFFFFF;
+    border: 1px solid #E5EBF2;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 28px rgba(16,43,78,0.05);
+}
+
+.analytics-card h2,
+.savings-card h2 {
+    color: #102B4E;
+    font-size: 20px;
+    font-weight: 750;
+    margin-bottom: 12px;
+}
+
+.section-description {
+    color: #718096;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+/* Analytics chart containers */
+
+.analytics-card canvas {
+    max-width: 100%;
+}
+
+/* Spending categories */
+
+.expense-item {
+    padding: 18px 0;
+    border-bottom: 1px solid #EDF1F6;
+}
+
+.expense-info {
+    color: #334155;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.progress-bar,
+.goal-bar,
+.savings-progress-bar {
+    height: 10px;
+    background: #EAF0F7;
+    border-radius: 20px;
+}
+
+.progress,
+.goal-progress,
+.savings-progress {
+    background: linear-gradient(90deg, #1C4D7C, #4598E5);
+    border-radius: 20px;
+}
+
+/* Savings goals */
+
+.goal-item {
+    padding: 20px 0;
+    border-bottom: 1px solid #EDF1F6;
+}
+
+.goal-info {
+    color: #263B55;
+    font-weight: 600;
+    gap: 15px;
+}
+
+.goal-info span {
+    color: #718096;
+    font-weight: 500;
+}
+
+.goal-item small {
+    color: #8493A7;
+    font-size: 12px;
+}
+
+/* Responsive cards and analytics */
+
+@media (max-width: 900px) {
+    .cards-layout,
+    .insights-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .card-preview {
+        min-height: 230px;
+        padding: 24px;
+        border-radius: 19px;
+    }
+
+    .card-number {
+        font-size: 18px;
+        letter-spacing: 2px;
+    }
+
+    .card-management,
+    .analytics-card,
+    .savings-card {
+        padding: 21px 17px;
+        border-radius: 17px;
+    }
+
+    .insights-grid {
+        gap: 17px;
+    }
+}
+/* ==========================================
+   AXOS BANK — STEP 4
+   LOGIN, REGISTRATION & DARK MODE
+   ========================================== */
+
+/* Login page */
+
+.login-page {
+    background:
+        radial-gradient(circle at 15% 15%, rgba(40,120,208,0.10), transparent 35%),
+        linear-gradient(135deg, #F4F7FB, #EAF1F9);
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+.login-brand h1 {
+    color: #102B4E;
+    font-size: 40px;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+}
+
+.login-brand h1 span {
+    color: #2878D0;
+}
+
+.login-brand p {
+    color: #718096;
+}
+
+.login-card {
+    background: #FFFFFF;
+    padding: 42px;
+    border: 1px solid #E5EBF2;
+    border-radius: 22px;
+    box-shadow: 0 20px 55px rgba(16,43,78,0.10);
+}
+
+.login-heading h2 {
+    color: #102B4E;
+    font-weight: 750;
+    letter-spacing: -0.5px;
+}
+
+.login-heading p {
+    color: #718096;
+    line-height: 1.6;
+}
+
+.login-field label {
+    color: #334155;
+    font-weight: 650;
+}
+
+.login-field input {
+    padding: 15px;
+    background: #F8FAFD;
+    border: 1px solid #DCE5EF;
+    border-radius: 11px;
+    color: #172B45;
+    transition: all 0.2s ease;
+}
+
+.login-field input:focus {
+    border-color: #2878D0;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 4px rgba(40,120,208,0.10);
+}
+
+.login-options a,
+.login-footer a {
+    color: #2878D0;
+}
+
+.login-submit {
+    background: linear-gradient(120deg, #102B4E, #2878D0);
+    border-radius: 11px;
+    padding: 16px;
+    font-weight: 700;
+}
+
+.login-submit:hover {
+    background: #2878D0;
+    transform: translateY(-2px);
+}
+
+.login-copyright {
+    color: #8493A7;
+}
+
+/* Dark mode */
+
+body.dark-mode {
+    background: #0B1220;
+    color: #E5EAF2;
+}
+
+body.dark-mode .dashboard,
+body.dark-mode .main-content {
+    background: #0B1220;
+    color: #E5EAF2;
+}
+
+body.dark-mode .sidebar {
+    background: #101C2E;
+    border-color: #26364B;
+}
+
+body.dark-mode .header h1,
+body.dark-mode .page-section h1,
+body.dark-mode .page-card h2,
+body.dark-mode .transactions h2,
+body.dark-mode .analytics-card h2,
+body.dark-mode .savings-card h2,
+body.dark-mode .overview-card h2 {
+    color: #E8F1FC;
+}
+
+body.dark-mode .header p,
+body.dark-mode .section-description,
+body.dark-mode .overview-card p {
+    color: #A2B2C7;
+}
+
+body.dark-mode .page-card,
+body.dark-mode .overview-card,
+body.dark-mode .analytics-card,
+body.dark-mode .savings-card,
+body.dark-mode .transactions,
+body.dark-mode .transaction-form,
+body.dark-mode .card-management {
+    background: #172438;
+    color: #E5EAF2;
+    border: 1px solid #293B53;
+    box-shadow: none;
+}
+
+body.dark-mode .profile,
+body.dark-mode .notification-button,
+body.dark-mode .notification-panel {
+    background: #172438;
+    border-color: #293B53;
+    color: #E5EAF2;
+}
+
+body.dark-mode .profile p,
+body.dark-mode .expense-info,
+body.dark-mode .goal-info {
+    color: #E5EAF2;
+}
+
+body.dark-mode .transactions table,
+body.dark-mode .transactions-table {
+    background: #172438;
+    border-color: #293B53;
+}
+
+body.dark-mode .transactions th,
+body.dark-mode .transactions-table th {
+    background: #21334B;
+    color: #B6C5D8;
+}
+
+body.dark-mode .transactions td,
+body.dark-mode .transactions-table td {
+    background: transparent;
+    color: #E5EAF2;
+    border-color: #293B53;
+}
+
+body.dark-mode .transactions tbody tr:hover,
+body.dark-mode .transactions-table tbody tr:hover {
+    background: #21334B;
+}
+
+body.dark-mode .transaction-form input,
+body.dark-mode .transaction-form select,
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+    background: #101C2E;
+    color: #E5EAF2;
+    border-color: #3A4B63;
+}
+
+body.dark-mode .card-status {
+    background: #21334B;
+    color: #E5EAF2;
+}
+
+body.dark-mode .expense-item,
+body.dark-mode .goal-item {
+    border-color: #293B53;
+}
+
+body.dark-mode .edit-modal-content,
+body.dark-mode .transaction-details-content {
+    background: #172438;
+    color: #E5EAF2;
+    border-color: #293B53;
+}
+
+body.dark-mode .notification-header {
+    border-color: #293B53;
+}
+
+body.dark-mode .notification-list {
+    color: #E5EAF2;
+}
+
+body.dark-mode .mobile-bottom-nav {
+    background: #101C2E;
+    border-color: #293B53;
+}
+
+/* Mobile login */
+
+@media (max-width: 600px) {
+    .login-page {
+        padding: 24px 16px;
+    }
+
+    .login-brand h1 {
+        font-size: 34px;
+    }
+
+    .login-card {
+        padding: 28px 22px;
+        border-radius: 18px;
+    }
+
+    .login-heading h2 {
+        font-size: 23px;
+    }
+}
+/* ==========================================
+   AXOS BANK — STEP 5
+   FINAL RESPONSIVE POLISH
+   ========================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+img {
+    max-width: 100%;
+}
+
+.main-content {
+    overflow-x: hidden;
+}
+
+.page-section {
+    width: 100%;
+    min-width: 0;
+}
+
+.page-section > * {
+    max-width: 100%;
+}
+
+@media (max-width: 900px) {
+    .main-content {
+        padding: 26px 22px;
+    }
+
+    .header {
+        align-items: center;
+    }
+
+    .overview {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .insights-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .cards-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .main-content {
+        padding: 22px 15px 100px;
+        width: 100%;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .profile {
+        padding: 6px 10px;
+    }
+
+    .profile-picture,
+    .profile span {
+        width: 36px;
+        height: 36px;
+    }
+
+    .balance-card {
+        padding: 25px 20px;
+        min-height: 165px;
+    }
+
+    .overview {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 11px;
+    }
+
+    .overview-card {
+        padding: 17px 12px;
+        min-width: 0;
+    }
+
+    .overview-card h2 {
+        font-size: 19px;
+    }
+
+    .transactions,
+    .page-card {
+        padding: 17px 13px;
+    }
+
+    .transactions {
+        overflow-x: auto;
+    }
+
+    .transactions table,
+    .transactions-table {
+        min-width: 520px;
+    }
+
+    .transaction-form {
+        grid-template-columns: 1fr !important;
+        padding: 18px;
+    }
+
+    .mobile-bottom-nav {
+        padding-bottom: env(safe-area-inset-bottom);
+        height: calc(68px + env(safe-area-inset-bottom));
+    }
+
+    .notification-panel {
+        max-width: calc(100vw - 30px);
+    }
+
+    .card-number {
+        font-size: 16px;
+        letter-spacing: 1.5px;
+    }
+
+    .login-card {
+        width: 100%;
+    }
+}
+
+/* Reduced motion accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
