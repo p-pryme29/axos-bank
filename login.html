@@ -9,71 +9,126 @@
 
 <body class="login-page">
 
-    <div class="login-container">
+    <main class="login-layout">
 
-        <div class="login-brand">
-            <h1>Axos Bank<span>.</span></h1>
-            <p>Take control of your finances.</p>
-        </div>
+        <!-- Branding and Hero Section -->
+        <section class="login-hero">
 
-        <div class="login-card">
+            <div class="login-hero-content">
 
-            <div class="login-heading">
-                <h2>Welcome back</h2>
-                <p>Enter your details to access your account.</p>
+                <a href="login.html" class="axos-logo">
+                    <svg viewBox="0 0 60 60" aria-hidden="true">
+                        <path d="M30 4 L53 17 L53 43 L30 56 L7 43 L7 17 Z"
+                              fill="none" stroke="#D6B36A" stroke-width="2.5"/>
+                        <path d="M17 39 L30 14 L43 39 M22 30 H38"
+                              fill="none" stroke="#D6B36A"
+                              stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <span>AXOS <strong>BANK</strong></span>
+                </a>
+
+                <div class="hero-message">
+                    <span class="hero-eyebrow">BANKING REIMAGINED</span>
+
+                    <h1>Your Trusted<br>
+                        Financial Partner.</h1>
+
+                    <p>
+                        Experience smarter banking with confidence,
+                        simplicity and complete control over your finances.
+                    </p>
+
+                    <div class="hero-features">
+                        <div>✓ Secure Banking Experience</div>
+                        <div>✓ Smarter Financial Management</div>
+                        <div>✓ Your Finances, Your Control</div>
+                    </div>
+                </div>
+
+                <div class="hero-bottom">
+                    PRIVATE BANKING. PERSONAL CONTROL.
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Login Form Section -->
+        <section class="login-panel">
+
+            <div class="login-card">
+
+                <div class="login-card-brand">
+                    <span>AXOS</span>
+                    <small>BANK</small>
+                </div>
+
+                <div class="login-heading">
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to access your personal banking dashboard.</p>
+                </div>
+
+                <form id="login-form">
+
+                    <div class="login-field">
+                        <label for="login-email">Email Address</label>
+                        <input
+                            type="email"
+                            id="login-email"
+                            placeholder="Enter your email address"
+                            required
+                        >
+                    </div>
+
+                    <div class="login-field">
+                        <label for="login-password">Password</label>
+                        <input
+                            type="password"
+                            id="login-password"
+                            placeholder="Enter your password"
+                            required
+                        >
+                    </div>
+
+                    <div class="login-options">
+                        <label>
+                            <input type="checkbox" id="remember-me">
+                            Remember me
+                        </label>
+
+                        <a href="#" id="forgot-password">
+                            Forgot Password?
+                        </a>
+                    </div>
+
+                    <button type="submit" class="login-submit">
+                        Sign In to Your Account
+                    </button>
+
+                </form>
+
+                <div class="login-register">
+                    <p>New to Axos Bank?</p>
+                    <a href="register.html">Create an Account</a>
+                </div>
+
+                <div class="login-security">
+                    <span>◆</span>
+                    Your banking experience is protected.
+                </div>
+
             </div>
 
-            <form id="login-form">
+            <footer class="login-copyright">
+                © 2026 Axos Bank. All rights reserved.
+            </footer>
 
-                <div class="login-field">
-                    <label for="login-email">Email Address</label>
-                    <input
-                        type="email"
-                        id="login-email"
-                        placeholder="Enter your email"
-                        required
-                    >
-                </div>
+        </section>
 
-                <div class="login-field">
-                    <label for="login-password">Password</label>
-                    <input
-                        type="password"
-                        id="login-password"
-                        placeholder="Enter your password"
-                        required
-                    >
-                </div>
-
-                <div class="login-options">
-                    <label>
-                        <input type="checkbox" id="remember-me">
-                        Remember me
-                    </label>
-
-                    <a href="#" id="forgot-password">Forgot password?</a>
-                </div>
-
-                <button type="submit" class="login-submit">
-                    Log In
-                </button>
-
-            </form>
-
-            <div class="login-footer">
-    <p>Private access to Axos Bank.</p>
-</div>
-        </div>
-
-        <p class="login-copyright">
-            © 2026 Axos Bank. All rights reserved.
-        </p>
-
-    </div>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase.js"></script>
-<script src="login.js"></script>
+    <script src="supabase.js"></script>
+    <script src="login.js"></script>
 
 </body>
 </html>
