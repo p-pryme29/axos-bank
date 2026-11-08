@@ -6455,3 +6455,202 @@ body.login-page {
         text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
     }
 }
+/* MOBILE — RESTORE SIGNATURE A LOGO */
+
+@media (max-width: 600px) {
+
+    body.login-page .login-hero .axos-logo {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        width: auto;
+        height: auto;
+        visibility: visible;
+        opacity: 1;
+        overflow: visible;
+        position: relative;
+        z-index: 5;
+    }
+
+    body.login-page .login-hero .axos-logo svg {
+        display: block !important;
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        visibility: visible;
+        opacity: 1;
+        flex-shrink: 0;
+    }
+
+    body.login-page .login-hero .axos-logo span {
+        display: inline-block !important;
+        color: #FFFFFF;
+        font-size: 19px;
+        letter-spacing: 2px;
+        white-space: nowrap;
+        visibility: visible;
+    }
+
+    body.login-page .login-hero .axos-logo strong {
+        color: #D6B36A;
+    }
+}
+/* OFFICIAL AXOS BANK BRAND IDENTITY */
+
+.axos-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.axos-logo svg {
+    display: block;
+    width: 58px;
+    height: 58px;
+    flex-shrink: 0;
+}
+
+.axos-wordmark {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1;
+}
+
+.axos-wordmark .axos-name {
+    color: #FFFFFF;
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: 4px;
+}
+
+.axos-wordmark strong {
+    color: #D6B36A;
+    font-size: 15px;
+    letter-spacing: 8px;
+    margin-top: 5px;
+}
+
+.axos-wordmark small {
+    color: #F3D28B;
+    font-size: 8px;
+    letter-spacing: 2px;
+    margin-top: 9px;
+    white-space: nowrap;
+}
+
+/* MOBILE BRANDING */
+
+@media (max-width: 600px) {
+    body.login-page .login-hero .axos-logo {
+        display: inline-flex !important;
+        gap: 9px;
+    }
+
+    body.login-page .login-hero .axos-logo svg {
+        display: block !important;
+        width: 48px;
+        height: 48px;
+    }
+
+    .axos-wordmark .axos-name {
+        font-size: 22px;
+    }
+
+    .axos-wordmark strong {
+        font-size: 12px;
+    }
+
+    .axos-wordmark small {
+        font-size: 7px;
+    }
+}
+/* MOBILE — FIX AXOS BANK WORDMARK STACKING */
+
+@media (max-width: 600px) {
+
+    body.login-page .login-hero .axos-wordmark {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: center;
+        line-height: 1.1;
+    }
+
+    body.login-page .login-hero .axos-wordmark .axos-name {
+        display: block !important;
+    }
+
+    body.login-page .login-hero .axos-wordmark strong {
+        display: block !important;
+        margin-top: 4px;
+    }
+
+    body.login-page .login-hero .axos-wordmark small {
+        display: block !important;
+        margin-top: 7px;
+        white-space: nowrap;
+    }
+}
+/* AXOS BANK SIDEBAR BRANDING */
+
+.sidebar .axos-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    text-decoration: none;
+    margin-bottom: 65px;
+}
+
+.sidebar .axos-logo svg {
+    display: block;
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+}
+
+.sidebar .axos-wordmark {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1;
+}
+
+.sidebar .axos-wordmark .axos-name {
+    color: #FFFFFF;
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.sidebar .axos-wordmark strong {
+    color: #D6B36A;
+    font-size: 12px;
+    letter-spacing: 6px;
+    margin-top: 4px;
+}
+
+.sidebar .axos-wordmark small {
+    color: #F3D28B;
+    font-size: 6px;
+    letter-spacing: 1.2px;
+    margin-top: 7px;
+    white-space: nowrap;
+}
+
+/* Remove old heading spacing */
+.sidebar .logo {
+    margin-bottom: 0;
+}
+/* AXOS SIDEBAR LOGO SPACING FIX */
+
+.sidebar .axos-logo {
+    margin-bottom: 0 !important;
+}
+
+.sidebar .navigation {
+    margin-top: 65px !important;
+}
