@@ -6654,3 +6654,166 @@ body.login-page {
 .sidebar .navigation {
     margin-top: 65px !important;
 }
+/* AXOS BANK PREMIUM CARD BRANDING */
+
+.card-brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    position: relative;
+    z-index: 2;
+}
+
+.card-brand-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid #D6B36A;
+    border-radius: 9px;
+    color: #F3D28B;
+    font-size: 22px;
+    font-weight: 800;
+    font-style: normal;
+}
+
+.card-brand-name {
+    color: #FFFFFF;
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-style: normal;
+}
+
+.card-brand-name small {
+    color: #D6B36A;
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-left: 3px;
+}
+/* =================================
+   AXOS BANK - PREMIUM CARD DESIGNS
+================================= */
+
+.bank-cards-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    width: 100%;
+}
+
+.bank-cards-list .card-preview {
+    width: 100%;
+    min-height: 230px;
+    box-sizing: border-box;
+    padding: 25px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    color: #ffffff;
+    background: linear-gradient(135deg, #102B4E, #1C4D7C, #07172D);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bank-cards-list .card-preview:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.28);
+}
+
+/* Midnight black card */
+
+.bank-cards-list .card-preview.black {
+    background: linear-gradient(135deg, #080B10, #252A32, #080B10);
+}
+
+/* Champagne gold card */
+
+.bank-cards-list .card-preview.gold {
+    background: linear-gradient(135deg, #80602E, #D6B36A, #57401F);
+    color: #ffffff;
+}
+
+/* Card chip */
+
+.bank-cards-list .card-chip {
+    width: 43px;
+    height: 32px;
+    margin: 22px 0 15px;
+    border-radius: 7px;
+    background: linear-gradient(135deg, #E5D5A5, #A98B4D);
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+/* Card number */
+
+.bank-cards-list .card-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    opacity: 0.75;
+    margin-bottom: 5px;
+}
+
+.bank-cards-list .card-number {
+    font-size: 19px;
+    letter-spacing: 2px;
+    margin: 0 0 20px;
+}
+
+/* Card details */
+
+.bank-cards-list .card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.bank-cards-list .card-bottom small {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    opacity: 0.7;
+}
+
+.bank-cards-list .card-bottom p {
+    font-size: 12px;
+    font-weight: 700;
+    margin: 6px 0 0;
+}
+
+/* Card status */
+
+.card-dynamic-status {
+    position: absolute;
+    top: 85px;
+    right: 25px;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    font-weight: 800;
+    color: #D6B36A;
+}
+
+.card-dynamic-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 18px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+/* Mobile layout */
+
+@media (max-width: 600px) {
+    .bank-cards-list {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .bank-cards-list .card-preview {
+        min-height: 220px;
+        padding: 22px;
+    }
+}

@@ -2488,8 +2488,9 @@ async function initializeWebsite() {
     await loadBankSettingsFromSupabase();
 
     await loadProfile();
-    await loadNotificationsFromSupabase();
-    applyRoleBasedAccess();
+await loadNotificationsFromSupabase();
+await loadBankCards();
+applyRoleBasedAccess();
 
     updateBalance();
 
@@ -2628,6 +2629,95 @@ if (closeTransactionDetailsButton) {
         document.getElementById("transaction-details-modal").hidden = true;
 
     });
+
+}
+// AXOS BANK - LOAD CARDS FROM SUPABASE
+
+async function loadBankCards() {
+
+    const { data: cards, error } = await supabaseClient
+        .from("bank_cards")
+        .select("*")
+        .order("created_at", { ascending: true });
+
+    if (error) {
+        console.error("CARD DATABASE ERROR:", error);
+        return;
+    }
+
+    const cardsContainer = document.getElementById("bank-cards-list");
+
+    if (!cardsContainer) {
+        console.error("Cards display container not found.");
+        return;
+    }
+
+    if (!cards || cards.length === 0) {
+        cardsContainer.innerHTML = "<p>No cards available.</p>";
+        return;
+    }
+
+    cardsContainer.innerHTML = cards.map(card => {
+
+        const design = ["navy", "black", "gold"].includes(card.card_design)
+            ? card.card_design
+            : "navy";
+
+        const isFrozen = card.status === "frozen";
+
+        return `
+            <div class="card-preview ${design}">
+
+                <div class="card-top">
+
+                    <div class="card-brand">
+                        <span class="card-brand-icon">A</span>
+                        <span class="card-brand-name">
+                            AXOS <small>BANK</small>
+                        </span>
+                    </div>
+
+                    <span class="card-visa">VISA</span>
+
+                </div>
+
+                <div class="card-chip"></div>
+
+                <p class="card-label">CARD NUMBER</p>
+
+                <h2 class="card-number">
+                    **** **** **** ${card.last_four}
+                </h2>
+
+                <div class="card-bottom">
+
+                    <div>
+                        <small>CARD HOLDER</small>
+                        <p>${card.cardholder_name}</p>
+                    </div>
+
+                    <div>
+                        <small>EXPIRES</small>
+                        <p>${String(card.expiry_month).padStart(2, "0")}/${String(card.expiry_year).slice(-2)}</p>
+                    </div>
+
+                </div>
+
+                <div class="card-dynamic-status">
+                    ${isFrozen ? "FROZEN" : "ACTIVE"}
+                </div>
+
+                <div class="card-dynamic-footer">
+                    <strong>${card.card_name}</strong>
+                    <span>${card.card_type}</span>
+                </div>
+
+            </div>
+        `;
+
+    }).join("");
+
+    console.log("Axos Bank cards displayed:", cards.length);
 
 }
 initializeWebsite();
